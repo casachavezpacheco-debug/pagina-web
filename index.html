@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBDEV | Desarrollo Web</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #08111f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* MENU DE NAVEGACION */
+
+        header {
+            background: #101e32;
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: #35d0c2;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #35d0c2;
+        }
+
+        /* MENU DESPLEGABLE */
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #142640;
+            min-width: 190px;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .desplegable:hover .submenu,
+        .desplegable:focus-within .submenu {
+            display: block;
+        }
+
+        .submenu a {
+            display: block;
+            padding: 10px;
+        }
+
+        /* PORTADA */
+
+        .portada {
+            padding: 110px 0;
+            background: linear-gradient(120deg, #08111f, #173b5c);
+        }
+
+        .portada h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .portada h1 span {
+            color: #35d0c2;
+        }
+
+        .portada p {
+            color: #b5c5d8;
+            font-size: 18px;
+            max-width: 650px;
+            margin-bottom: 25px;
+        }
+
+        .boton {
+            display: inline-block;
+            background: #35d0c2;
+            color: #08111f;
+            padding: 12px 22px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .boton:hover {
+            background: #ffffff;
+        }
+
+        /* SECCIONES */
+
+        section {
+            padding: 75px 0;
+        }
+
+        .titulo {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #35d0c2;
+        }
+
+        .descripcion {
+            color: #b5c5d8;
+            margin-bottom: 30px;
+        }
+
+        /* TARJETAS */
+
+        .rejilla {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tarjeta {
+            background: #142640;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #263d59;
+            transition: 0.3s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-7px);
+            border-color: #35d0c2;
+        }
+
+        .tarjeta h3 {
+            color: #35d0c2;
+            margin-bottom: 12px;
+        }
+
+        .tarjeta p {
+            color: #b5c5d8;
+        }
+
+        /* PROBLEMAS Y SOLUCIONES */
+
+        .fondo {
+            background: #101e32;
+        }
+
+        .dos-columnas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .problema,
+        .solucion {
+            background: #142640;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .problema h3 {
+            color: #ffad66;
+            margin-bottom: 10px;
+        }
+
+        .solucion h3 {
+            color: #35d0c2;
+            margin-bottom: 10px;
+        }
+
+        .problema p,
+        .solucion p {
+            color: #b5c5d8;
+        }
+
+        /* PROCESO */
+
+        .pasos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .paso {
+            background: #142640;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .paso h3 {
+            color: #35d0c2;
+            margin-bottom: 10px;
+        }
+
+        .paso p {
+            color: #b5c5d8;
+        }
+
+        /* CONTACTO */
+
+        .contacto {
+            background: linear-gradient(120deg, #142640, #173b5c);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .contacto p {
+            color: #b5c5d8;
+            margin: 10px 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #050b14;
+            padding: 30px 0;
+            text-align: center;
+            color: #b5c5d8;
+            border-top: 1px solid #263d59;
+        }
+
+        footer a {
+            color: #35d0c2;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        /* ADAPTACION A CELULARES */
+
+        @media (max-width: 800px) {
+            .barra {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .rejilla {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pasos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            .rejilla,
+            .dos-columnas,
+            .pasos {
+                grid-template-columns: 1fr;
+            }
+
+            .portada h1 {
+                font-size: 35px;
+            }
+
+            .contacto {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- MENU PRINCIPAL -->
+
+    <header>
+        <div class="contenedor barra">
+
+            <div class="logo">
+                WEB<span>DEV</span>
+            </div>
+
+            <nav>
+                <ul>
+
+                    <li><a href="#inicio">Inicio</a></li>
+
+                    <li class="desplegable">
+                        <a href="#informacion">Información ▾</a>
+
+                        <div class="submenu">
+                            <a href="#conceptos">Conceptos básicos</a>
+                            <a href="#tecnologias">Tecnologías</a>
+                            <a href="#proceso">Proceso</a>
+                        </div>
+                    </li>
+
+                    <li><a href="#problemas">Problemas</a></li>
+
+                    <li><a href="#soluciones">Soluciones</a></li>
+
+                    <li><a href="#contacto">Contacto</a></li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- INICIO -->
+
+    <section class="portada" id="inicio">
+
+        <div class="contenedor">
+
+            <h1>
+                Desarrollo de
+                <span>Páginas Web</span>
+            </h1>
+
+            <p>
+                Descubre el mundo del desarrollo web,
+                aprende sus conceptos fundamentales,
+                conoce las tecnologías utilizadas y
+                encuentra soluciones a los problemas
+                más comunes al crear sitios web.
+            </p>
+
+            <a href="#informacion" class="boton">
+                Explorar contenido
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- INFORMACION BASICA -->
+
+    <section id="informacion">
+
+        <div class="contenedor">
+
+            <h2 class="titulo" id="conceptos">
+                ¿Qué es el desarrollo web?
+            </h2>
+
+            <p class="descripcion">
+                Es el proceso de crear y mantener sitios
+                web mediante diferentes herramientas y
+                lenguajes de programación.
+            </p>
+
+            <div class="rejilla" id="tecnologias">
+
+                <div class="tarjeta">
+                    <h3>HTML</h3>
+
+                    <p>
+                        Es el lenguaje que permite crear
+                        la estructura de una página web,
+                        organizando títulos, textos,
+                        imágenes y enlaces.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>CSS</h3>
+
+                    <p>
+                        Permite diseñar la apariencia
+                        visual de una página web mediante
+                        colores, tamaños, fondos y
+                        distribución de elementos.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>JavaScript</h3>
+
+                    <p>
+                        Es un lenguaje de programación
+                        utilizado para agregar funciones
+                        interactivas y comportamientos
+                        dinámicos a los sitios web.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PROBLEMAS -->
+
+    <section class="fondo" id="problemas">
+
+        <div class="contenedor">
+
+            <h2 class="titulo">
+                Problemas comunes
+            </h2>
+
+            <p class="descripcion">
+                Durante el desarrollo de páginas web
+                pueden aparecer diferentes dificultades.
+            </p>
+
+            <div class="dos-columnas">
+
+                <div class="problema">
+                    <h3>Diseño desorganizado</h3>
+
+                    <p>
+                        Los elementos de la página no
+                        mantienen una distribución
+                        adecuada y dificultan la lectura.
+                    </p>
+                </div>
+
+                <div class="problema">
+                    <h3>Problemas de visualización</h3>
+
+                    <p>
+                        La página no se adapta correctamente
+                        a diferentes dispositivos como
+                        celulares y tabletas.
+                    </p>
+                </div>
+
+                <div class="problema">
+                    <h3>Carga lenta</h3>
+
+                    <p>
+                        Las imágenes demasiado pesadas
+                        y los archivos innecesarios
+                        provocan lentitud en el sitio.
+                    </p>
+                </div>
+
+                <div class="problema">
+                    <h3>Enlaces incorrectos</h3>
+
+                    <p>
+                        Algunos botones o enlaces no
+                        dirigen correctamente a las
+                        secciones correspondientes.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SOLUCIONES -->
+
+    <section id="soluciones">
+
+        <div class="contenedor">
+
+            <h2 class="titulo">
+                Soluciones
+            </h2>
+
+            <p class="descripcion">
+                Existen diferentes prácticas que ayudan
+                a mejorar el funcionamiento y diseño
+                de una página web.
+            </p>
+
+            <div class="rejilla">
+
+                <div class="tarjeta">
+                    <h3>Organizar el contenido</h3>
+
+                    <p>
+                        Utilizar títulos, párrafos y
+                        secciones para mantener una
+                        estructura clara y ordenada.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Diseño adaptable</h3>
+
+                    <p>
+                        Utilizar CSS responsivo para
+                        adaptar el sitio a computadoras,
+                        tabletas y celulares.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Optimizar imágenes</h3>
+
+                    <p>
+                        Reducir el tamaño de las imágenes
+                        para mejorar la velocidad de
+                        carga del sitio.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Revisar los enlaces</h3>
+
+                    <p>
+                        Comprobar que todos los botones
+                        y enlaces funcionen correctamente.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Corregir errores</h3>
+
+                    <p>
+                        Revisar el código HTML y CSS
+                        para encontrar y solucionar
+                        posibles errores.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Mejorar la experiencia</h3>
+
+                    <p>
+                        Crear páginas fáciles de utilizar,
+                        con información clara y
+                        navegación sencilla.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PROCESO DE DESARROLLO -->
+
+    <section class="fondo" id="proceso">
+
+        <div class="contenedor">
+
+            <h2 class="titulo">
+                Proceso de desarrollo web
+            </h2>
+
+            <p class="descripcion">
+                Para crear una página web se pueden
+                seguir cuatro etapas fundamentales.
+            </p>
+
+            <div class="pasos">
+
+                <div class="paso">
+                    <h3>01. Planificación</h3>
+
+                    <p>
+                        Definir el objetivo y el contenido
+                        que tendrá el sitio web.
+                    </p>
+                </div>
+
+                <div class="paso">
+                    <h3>02. Diseño</h3>
+
+                    <p>
+                        Organizar las secciones y
+                        seleccionar los colores y estilos.
+                    </p>
+                </div>
+
+                <div class="paso">
+                    <h3>03. Desarrollo</h3>
+
+                    <p>
+                        Crear la estructura utilizando
+                        HTML y aplicar estilos con CSS.
+                    </p>
+                </div>
+
+                <div class="paso">
+                    <h3>04. Pruebas</h3>
+
+                    <p>
+                        Comprobar el funcionamiento
+                        y corregir posibles errores.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACTO -->
+
+    <section id="contacto">
+
+        <div class="contenedor">
+
+            <div class="contacto">
+
+                <h2 class="titulo">
+                    Información de contacto
+                </h2>
+
+                <p>
+                    ¿Tienes alguna consulta o proyecto
+                    relacionado con el desarrollo web?
+                    Puedes comunicarte conmigo.
+                </p>
+
+                <p>
+                    <strong>Nombre:</strong>
+                    Tu nombre
+                </p>
+
+                <p>
+                    <strong>Correo electrónico:</strong>
+                    tucorreo@ejemplo.com
+                </p>
+
+                <p>
+                    <strong>Teléfono:</strong>
+                    +503 0000-0000
+                </p>
+
+                <p>
+                    <strong>Especialidad:</strong>
+                    Desarrollo de páginas web
+                </p>
+
+                <a href="mailto:tucorreo@ejemplo.com"
+                   class="boton">
+                    Enviar correo
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PIE DE PAGINA -->
+
+    <footer>
+
+        <div class="contenedor">
+
+            <p>
+                © 2026 WEBDEV - Desarrollo de Páginas Web
+            </p>
+
+            <p>
+                Diseñado con HTML y CSS puro.
+            </p>
+
+            <br>
+
+            <a href="#inicio">Inicio</a>
+
+            <a href="#informacion">Información</a>
+
+            <a href="#contacto">Contacto</a>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
